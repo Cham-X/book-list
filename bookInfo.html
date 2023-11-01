@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Info</title>
+    <link rel="stylesheet" href="bookInfo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Infos</h1>
+        <form class="form">
+            <div>
+                <label for="book-title">Book Title</label>
+                <input type="text" name="book-title" id="book-title" placeholder="Enter Book Title">
+            </div>
+            <div>
+                <label for="book-author">Book Author</label>
+                <input type="text" name="book-author" id="book-author" placeholder="Enter Book Author">
+            </div>
+            <div>
+                <label for="book-isbn">ISBN</label>
+                <input type="text" name="book-isbn" id="book-isbn" placeholder="Enter Book ISBN">
+            </div>
+            <input type="submit" value="ADD BOOK INFO" id="add-book">
+        </form>
+        <input type="text" name="search-book" id="search-book" placeholder="Filter Books">
+          <table>
+            <thead>
+              <tr>
+                <th>Book Title</th>
+                <th>Book Author</th>
+                <th>ISBN</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="book-table">
+            </tbody>
+        </table>
+        <button class="clear-btn">CLEAR ALL BOOK INFO</button>
+    </div>
+
+    <script src="/bookInfo.js"></script>
+</body>
+</html>
