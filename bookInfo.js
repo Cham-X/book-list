@@ -6,8 +6,8 @@ const bookAuthorInput = document.querySelector("#book-author")
 const bookIsbnInput = document.querySelector("#book-isbn")
 const addBookBtn = document.querySelector("#add-book")
 const clearBooksBtn = document.querySelector(".clear-btn")
-const filterBooksInput = document.querySelector("#search-book")
-const list = document.querySelector(".book-table")
+const tableBody = document.querySelector(".book-table")
+
 
 
 loadAllEventListeners()
@@ -18,35 +18,36 @@ function loadAllEventListeners() {
     // clear all book info
     clearBooksBtn.addEventListener("click", clearBooks)
     // delete book row
-    list.addEventListener("click", removeBook)
-    // filter item
-    filterBooksInput.addEventListener("keyup", filterBook)
+    tableBody.addEventListener("click", removeBook)
+
 }
 
 function addBook(e) {
     if (bookTitleInput.value === "" || bookAuthorInput.value === "" || bookIsbnInput.value === "") {
         showAlert("Please Fill In All field", "error")
-    } else {
-        const row = document.createElement('tr')
-        row.className = 'book-row'
-
-        row.innerHTML = `
+    }else {
+        const tableRow = document.createElement('tr')
+        tableRow.className = 'book-row'
+    
+        tableRow.innerHTML = `
         <td>${bookTitleInput.value}</td>
         <td>${bookAuthorInput.value}</td>
         <td>${bookIsbnInput.value}</td>
         <td class="delete-item">delete</td>
         `
 
-        list.appendChild(row);
-
-        showAlert("Book Added sucessfully!", "success")
-
+        tableBody.appendChild(tableRow)
+    
         clearFields()
-
+        
+        showAlert("Book Item Added Successfully!","success")
+    
     }
 
     e.preventDefault()
 }
+
+
 
 function clearFields() {
     bookAuthorInput.value = "";
@@ -55,45 +56,34 @@ function clearFields() {
 }
 
 function clearBooks() { 
-    list.innerHTML = ""
+    tableBody.innerHTML = ""
 
     showAlert("All books cleared!", "success")
+
 }
 
 function showAlert(message, className) {
     const div = document.createElement("div")
-    div.className = `alert ${className}`;
+    div.className = `alert ${className}`
     div.appendChild(document.createTextNode(message))
+   
+    const conatainer = document.querySelector(".container")
 
-    const container = document.querySelector(".container");
-
-    container.insertBefore(div, form);
-
-    setTimeout(() => {
-        document.querySelector(".alert").remove()
-    }, 3000);
+    conatainer.insertBefore(div, form)
     
+    setTimeout(() => {
+        div.remove()
+    }, 3000);
+
 }
 
 function removeBook(e) {
     if (e.target.classList.contains("delete-item")) {
+
+
         e.target.parentElement.remove()
 
         showAlert("Book Item Deleted", "success")
     }
 }
 
-function filterBook(e) {
-    const text = e.target.value.toLowerCase();
-
-    document.querySelectorAll(".book-row").forEach(function(book){
-        const item = book.firstChild.textContent;
-        console.log(item)
-        if(item.toLocaleLowerCase().indexOf(book) != -1){
-           book.style.display = "flex"
-        } else {
-            book.style.display = "none"
-        }
-    })
-    console.log(text)
-}
